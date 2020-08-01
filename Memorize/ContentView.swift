@@ -15,15 +15,17 @@ struct ContentView: View {
     var body: some View {
         HStack {
             ForEach(viewModel.cards) { card in
-                CardView(card: card).onTapGesture {
-                    self.viewModel.chooseCard(card)
+                if !card.isMatched {
+                    CardView(card: card).onTapGesture {
+                        self.viewModel.chooseCard(card)
+                    }
+                        .aspectRatio(2/3, contentMode: .fit)
                 }
-                .aspectRatio(2/3, contentMode: .fit)
-
+                
             }
-            
+         
         }
-      
+        
 
     }
 }
