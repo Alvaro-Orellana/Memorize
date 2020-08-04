@@ -10,44 +10,79 @@ import SwiftUI
 
 struct PracticeView: View {
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 10) {
+            Text("Geometry Reader")
+                .font(.largeTitle)
             
-            Text("VStack").font(.largeTitle)
-            Text("Introduction")
+            Text("Min Mid Max")
+                .font(.title)
                 .foregroundColor(.gray)
             
-            Text("View stacks are vew that contain other views")
-                .frame(maxWidth: .infinity, minHeight: 70)
-                .background(Color.blue)
-                .foregroundColor(.white)
+            Text("You can also get the minimum (min), middle (mid), and maximum (max) X and Y coordinate from the geometry readerBooks.")
             
-            Text("The containing the views are stacked vertically")
-                .frame(maxWidth: .infinity)
-
-            RectangleExample(alignment: .center)
-
+            GeometryReader { geometry in
+                VStack{
+                    Text("Local coordinate space")
+                    HStack{
+                        Text("Min: \(Int(geometry.frame(in: .local).minX))")
+                        Spacer()
+                        Text("Mid: \(Int(geometry.frame(in: .local).midX))")
+                        Spacer()
+                        Text("Max: \(Int(geometry.frame(in: .local).maxX))")
+                    }
+                    
+                    Text("Global coordinate space")
+                    HStack{
+                        Text("Min: \(Int(geometry.frame(in: .global).minX))")
+                        Spacer()
+                        Text("Mid: \(Int(geometry.frame(in: .global).midX))")
+                        Spacer()
+                        Text("Max: \(Int(geometry.frame(in: .global).maxX))")
+                    }
+                    }
+                .padding()
+                .foregroundColor(.white)
+            }
+            .background(Color.pink)
+            
+            
+            HStack {
+                GeometryReader { geometry in
+                    VStack{
+                        
+                        Text("Min: \(Int(geometry.frame(in: .local).minY))")
+                        Spacer()
+                        Text("Mid: \(Int(geometry.frame(in: .local).midY))")
+                        Spacer()
+                        Text("Max: \(Int(geometry.frame(in: .local).maxY))")
+                        Spacer()
+                        
+                    }
+                    .foregroundColor(.white)
+                }
+                .background(Color.pink)
+                
+                GeometryReader { geometry in
+                    VStack{
+                        
+                        Text("Min: \(Int(geometry.frame(in: .global).minY))")
+                        Spacer()
+                        Text("Mid: \(Int(geometry.frame(in: .global).midY))")
+                        Spacer()
+                        Text("Max: \(Int(geometry.frame(in: .global).maxY))")
+                        Spacer()
+                        
+                    }
+                    .foregroundColor(.white)
+                }
+                .background(Color.pink)
+            }
+        
         }
-        .font(.title)
+        .padding()
     }
 }
 
-struct RectangleExample: View {
-    var alignment: HorizontalAlignment
-    var body: some View {
-        VStack(alignment: alignment, spacing: 20) {
-            Text("VStack inside another VStack")
-            Text("This can be handy why?")
-            Text("More than 10 view creates an error")
-
-        }
-        .padding()
-        .background(Color.blue)
-        .foregroundColor(.white)
-        .cornerRadius(10)
-        .padding()
-
-    }
-}
 
 
 struct PracticeView_Previews: PreviewProvider {

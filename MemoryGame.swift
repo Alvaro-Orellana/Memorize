@@ -42,6 +42,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     
         //Finds the index of the card touched by the user
         if let chosenIndex = findFirstIndex(matching: card) {
+            print("The card \(card) was touched")
             
             //Enters this if, only when the card touched by the user is face down and not matched
             //meaning acts as if the user didnt touch anything
@@ -56,6 +57,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                         cards[potentialIndex].isMatched = true
                         cards[chosenIndex].isMatched = true
                     }
+                    
                     
                 } else {
                     //The cards we either all face down, or two were face up
