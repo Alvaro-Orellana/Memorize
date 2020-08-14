@@ -13,14 +13,32 @@ struct ContentView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
-        GridView(viewModel.cards) { card in
-                CardView(card: card).onTapGesture {
-                    self.viewModel.chooseCard(card)
-                }
-                .padding()
+        VStack {
+            
+            Text("Score: \(viewModel.gameScore())")
+                .font(.title)
+                .padding(.top)
+            
+            
+            GridView(viewModel.cards) { card in
+                    CardView(card: card).onTapGesture {
+                        self.viewModel.chooseCard(card)
+                    }
+                    .padding()
+            }
+            
+            
+            Button(action: viewModel.newGame) {
+                Text("New Game")
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(30)
+            }
+            .padding(.bottom)
+            
         }
-        
-    .padding()
+        .navigationBarTitle(Text(viewModel.gameTheme), displayMode: .inline)
         
 
     }
@@ -57,6 +75,6 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: EmojiMemoryGame())
+        ContentView(viewModel: EmojiMemoryGame(chosenTheme: "Faces"))
     }
 }
